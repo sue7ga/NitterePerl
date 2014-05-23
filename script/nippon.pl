@@ -6,9 +6,10 @@ use Carp;
 use FindBin;
 use lib "$FindBin::Bin/../lib";
 use WWW::Nittere::API;
+use Data::Dumper;
 
 
 my $nittere = WWW::Nittere::API->new(apikey =>'zbm57ygyvg78mxbkSEEOJpRkLNQvBhadRmeuuw3KFv5vTAmWXujaQS4ktbtu');
 
-print $nittere->request('NEWS');
+print Dumper $nittere->request('NEWS');
 

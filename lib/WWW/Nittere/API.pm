@@ -37,10 +37,9 @@ sub url{
 sub request{
   my ($self,$title) = @_;
   my $requrl = $self->url."&title=$title";
-  my $response = get($requrl);
-  return $response;
-  my $xml = XML::Simple->new;
-  my $data = $xml->XMLin($response);
+  my $response = LWP::Simple::get($requrl);
+  my $parser = XML::Simple->new;
+  my $data = $parser->XMLin($response);
   return $data;
 }
 
