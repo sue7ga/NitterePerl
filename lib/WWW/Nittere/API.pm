@@ -6,6 +6,7 @@ use utf8;
 use URI;
 
 use LWP::Simple;
+use LWP::UserAgent;
 use XML::Simple;
 use XML::LibXML;
 use XML::LibXML::XPathContext;
@@ -37,9 +38,11 @@ sub url{
 sub request{
   my ($self,$title) = @_;
   my $requrl = $self->url."&title=$title";
-  my $response = LWP::Simple::get($requrl);
+  my $ua = LWP::UserAgent->new;
+  my $res = $ua->get($requrl);
+  my $content = $res->decoded_content;
   my $parser = XML::Simple->new;
-  my $data = $parser->XMLin($response);
+  my $data = $parser->XMLin($content);
   return $data;
 }
 
